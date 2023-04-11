@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.GOATstore.backend.entity.Categoria;
 import com.GOATstore.backend.service.CategoriaService;
-
-
 
 @RestController
 @RequestMapping("/api/categoria")
