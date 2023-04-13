@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.GOATstore.backend.entity.Produto;
@@ -23,18 +24,17 @@ public class ProdutoController {
     
     @Autowired
     private ProdutoService produtoService;
-    private ProdutoRepository buscarLupa;
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     @GetMapping("/")
     public List<Produto> buscarTodos(){
      return produtoService.buscarTodos();
     }
 
-
-
     @GetMapping("/Lupa")
-        public List<Produto> buscarProduto(String marca, String categoria, String nome){
-         return   buscarLupa.buscarPorReferencia("marca", "categoria", "nome");
+        public List<Produto> buscarProduto(@RequestParam String marca, @RequestParam String categoria, @RequestParam String nome){
+         return   produtoRepository.buscarPorReferencia(marca, categoria, nome);
         }
 
 
