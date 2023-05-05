@@ -35,10 +35,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
       + " WHERE p.id = :id")
       List<Produto> buscarPorId(@Param("id") Long id);
 
-
-
-
-
                   
       // @Query(" SELECT * FROM produto p INNER JOIN marca m ON p.id_marca = m.id
       // INNER JOIN produtoImagens c ON p.id_categoria = c.id INNER JOIN categoria c

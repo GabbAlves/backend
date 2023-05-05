@@ -30,7 +30,6 @@ public class CategoriaController {
     @Autowired
     DataSource dataSource;
 
-
     @GetMapping("/")
     public List<Categoria> buscarTodos(){
         return categoriaService.buscarTodos();
@@ -42,9 +41,13 @@ public class CategoriaController {
         
     }
 
-    @PutMapping("/")
-    public Categoria alterar(@RequestBody Categoria categoria){
-        return categoriaService.alterar(categoria);
+    @PutMapping("/{id}")
+    public  Categoria alterar(@PathVariable("id") Long id,  @RequestBody(required = false) String novoNome) throws Exception{
+        try {
+            return categoriaService.alterar(id, novoNome);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @DeleteMapping("/{id}")
