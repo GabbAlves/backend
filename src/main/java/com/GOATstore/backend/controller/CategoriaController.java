@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.GOATstore.backend.entity.Categoria;
 import com.GOATstore.backend.service.CategoriaService;
-
-
 
 @RestController
 @RequestMapping("/api/categoria")
@@ -32,7 +29,6 @@ public class CategoriaController {
 
     @Autowired
     DataSource dataSource;
-
 
     @GetMapping("/")
     public List<Categoria> buscarTodos(){
@@ -45,9 +41,13 @@ public class CategoriaController {
         
     }
 
-    @PutMapping("/")
-    public Categoria alterar(@RequestBody Categoria categoria){
-        return categoriaService.alterar(categoria);
+    @PutMapping("/{id}")
+    public  Categoria alterar(@PathVariable("id") Long id,  @RequestBody(required = false) String novoNome) throws Exception{
+        try {
+            return categoriaService.alterar(id, novoNome);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @DeleteMapping("/{id}")

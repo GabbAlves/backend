@@ -28,6 +28,7 @@ public class ProdutoImagens {
     @ManyToOne
     @JoinColumn(name="idProduto")
     private Produto produto;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
     @Temporal(TemporalType.TIMESTAMP)

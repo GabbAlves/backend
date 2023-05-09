@@ -34,6 +34,11 @@ public class Produto {
     @JoinColumn(name= "idCategoria")
     private Categoria categoria;
 
+    
+    // @ManyToOne
+    // @JoinColumn(name= "idProdutoImagens")
+    // private ProdutoImagens produtoImagens;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
     @Temporal(TemporalType.TIMESTAMP)

@@ -44,6 +44,10 @@ public class ProdutoImagensController {
             produtoImagensService.excluir(id);
             return ResponseEntity.ok().build();
         }
+
+        
+        
+        }
+        
+
     
-    
-}
