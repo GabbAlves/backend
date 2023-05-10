@@ -38,7 +38,7 @@ public class PessoaClienteController {
 
 
     @PostMapping("/")
-    public Pessoa inserir(@RequestBody PessoaClienteRequestDTO pessoaClienteRequestDTO) {
+    public Pessoa inserir(@RequestBody PessoaClienteRequestDTO pessoaClienteRequestDTO) throws Exception {
        // Pessoa pessoa = new PessoaClienteRequestDTO().converter(pessoaClienteRequestDTO);
         return pessoaService.inserir(pessoaClienteRequestDTO);
     }

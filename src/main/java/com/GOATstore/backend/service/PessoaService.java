@@ -19,7 +19,21 @@ public class PessoaService{
         return pessoaRepository.findAll();
     }
 
-    public Pessoa inserir(Pessoa pessoa){
+    public Pessoa inserir(Pessoa pessoa) throws Exception {
+        if (pessoa.getNome() == null || pessoa.getNome().isEmpty()) {
+            throw new Exception("O nome de usuario não pode ser vazio");
+        }
+        if (pessoa.getEmail() == null) {
+            throw new Exception("O email do usuario não pode ser vazio");
+        }
+        if (pessoa.getSenha() != null && !pessoa.getSenha().isEmpty()) {
+
+        }
+
+        List<Pessoa> pessoas = pessoaRepository.findByEmail(pessoa.getNome(), pessoa.getEmail());
+        if (pessoas != null && !pessoas.isEmpty()) {
+            throw new Exception("Já existe uma pessoa cadastrada com o mesmo nome e o Email.");
+        }
         pessoa.setDataCriacao(new Date());
         Pessoa pessoaNovo = pessoaRepository.saveAndFlush(pessoa);
         return pessoaNovo;

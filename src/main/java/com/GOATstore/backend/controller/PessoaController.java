@@ -29,7 +29,7 @@ public class PessoaController {
     }
     
     @PostMapping("/")
-        public Pessoa inserir(@RequestBody Pessoa pessoa){
+        public Pessoa inserir(@RequestBody Pessoa pessoa) throws Exception{
             return pessoaService.inserir(pessoa);
         }
     

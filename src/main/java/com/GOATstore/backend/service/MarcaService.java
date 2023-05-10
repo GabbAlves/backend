@@ -20,19 +20,29 @@ public class MarcaService {
         return marcaRepository.findAll();
     }
     
-    public Marca inserir(Marca marca){
-       if (marca.getNome().equals("") ) {
-        throw new RuntimeException("Ocorreu um erro!");    
+    public Marca inserir(Marca marca) {
+        // Verifica se o nome da marca é válido e não está vazio
+        if (marca.getNome() == null || marca.getNome().isEmpty()) {
+            throw new IllegalArgumentException("O nome da marca não pode ser vazio");
+        }
 
-       } else {
-           marca.setDataCriacao(new Date());
-           Marca marcaNovo = marcaRepository.saveAndFlush(marca);
-           return marcaNovo;
-       }
-       
+        // Verifica se já existe outra marca com o mesmo nome
+        Marca marcaExistente = marcaRepository.findByNome(marca.getNome());
+        if (marcaExistente != null) {
+            throw new IllegalArgumentException("Já existe uma marca com o mesmo nome");
+        }
+
+        // Define a data de criação e salva a nova marca
+        marca.setDataCriacao(new Date());
+        Marca marcaNova = marcaRepository.saveAndFlush(marca);
+
+        return marcaNova;
     }
 
-    public Marca alterar(Marca marca){
+    public Marca alterar(Marca marca) {
+        if (marca.getId() == null) {
+            throw new IllegalArgumentException("Não é possível atualizar uma marca sem ID");
+        }
         marca.setDataAtualizacao(new Date());
         return marcaRepository.saveAndFlush(marca);
     }
