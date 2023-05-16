@@ -39,12 +39,20 @@ public class MarcaService {
         return marcaNova;
     }
 
-    public Marca alterar(Marca marca) {
-        if (marca.getId() == null) {
-            throw new IllegalArgumentException("Não é possível atualizar uma marca sem ID");
-        }
-        marca.setDataAtualizacao(new Date());
-        return marcaRepository.saveAndFlush(marca);
+    public Marca alterar(Long id, String nome) {
+            if (id == null) {
+                throw new IllegalArgumentException("O id não pode ser nulo");
+            }
+            if (nome == null || nome.isEmpty()) {
+                throw new IllegalArgumentException("O nome não pode estar vazio ou nulo");
+            }
+            Marca alterarMarca = marcaRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Marca não encontrada"));
+            alterarMarca.setDataAtualizacao(new Date());
+            alterarMarca.setNome(nome);
+            return marcaRepository.saveAndFlush(alterarMarca);
+        
+        
     }
 
     public void excluir(Long id){

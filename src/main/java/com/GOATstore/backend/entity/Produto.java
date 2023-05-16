@@ -25,6 +25,7 @@ public class Produto {
     private String nome;
     private String descricaoProduto;
     private String valor;
+    private String imagem;
     
     @ManyToOne
     @JoinColumn(name= "idMarca")

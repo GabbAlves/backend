@@ -1,6 +1,5 @@
 package com.GOATstore.backend.entity;
 
-import java.sql.Blob;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -23,7 +22,6 @@ public class ProdutoImagens {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private Blob imagem;
 
     @ManyToOne
     @JoinColumn(name="idProduto")

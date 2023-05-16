@@ -30,7 +30,7 @@ public class PessoaService{
 
         }
 
-        List<Pessoa> pessoas = pessoaRepository.findByEmail(pessoa.getNome(), pessoa.getEmail());
+        List<Pessoa> pessoas = (List<Pessoa>) pessoaRepository.findByEmail(pessoa.getEmail());
         if (pessoas != null && !pessoas.isEmpty()) {
             throw new Exception("Já existe uma pessoa cadastrada com o mesmo nome e o Email.");
         }

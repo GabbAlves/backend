@@ -37,29 +37,20 @@ public class CategoriaService {
         return categoriaNova;
     }
 
-    public Categoria alterar(Long id, String novoNome) throws Exception {
-        Categoria categoria = categoriaRepository.findById(id).get();
-        Categoria categoriaExistente = categoriaRepository.findById(categoria.getId()).orElse(null);
-        if (categoriaExistente == null) {
-            throw new RuntimeException("Categoria não encontrada");
+    public Categoria alterar(Long id, String nome) throws Exception {
+            if (id == null) {
+                throw new IllegalArgumentException("O id não pode ser nulo");
+            }
+            if (nome == "" || nome.isEmpty()) {
+                throw new IllegalArgumentException("O nome não pode estar vazio ou nulo");
+            }
+            Categoria alterarCategoria = categoriaRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada"));
+            alterarCategoria.setDataAtualizacao(new Date());
+            alterarCategoria.setNome(nome);
+            return categoriaRepository.saveAndFlush(alterarCategoria);
         }
-
-        novoNome = categoriaExistente.getNome();
-        if (novoNome.isEmpty()) {
-            throw new RuntimeException("O nome da categoria não pode ser vazio");
-        }
-
-        Categoria categoriaComMesmoNome = categoriaRepository.findByNome(novoNome);
-       
-        if (categoriaComMesmoNome != null && !categoriaComMesmoNome.getId().equals(categoriaExistente.getId())) {
-            throw new RuntimeException("Já existe uma categoria com esse nome");
-        }
-
-        categoriaExistente.setNome(novoNome);
-        categoriaExistente.setDataAtualizacao(new Date());
-
-        return categoriaRepository.saveAndFlush(categoriaExistente);
-    }
+        
 
     public void excluir(Long id) {
         Categoria categoria = categoriaRepository.findById(id).get();

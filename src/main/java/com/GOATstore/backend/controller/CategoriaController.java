@@ -42,12 +42,9 @@ public class CategoriaController {
     }
 
     @PutMapping("/{id}")
-    public  Categoria alterar(@PathVariable("id") Long id,  @RequestBody(required = false) String novoNome) throws Exception{
-        try {
-            return categoriaService.alterar(id, novoNome);
-        } catch (Exception ex) {
-            return null;
-        }
+    public  Categoria alterar(@PathVariable("id") Long id,  @RequestBody(required = false) String nome) throws Exception{
+            return categoriaService.alterar(id, nome);
+      
     }
 
     @DeleteMapping("/{id}")

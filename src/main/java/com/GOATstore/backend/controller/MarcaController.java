@@ -42,9 +42,9 @@ public class MarcaController {
         }
     
 
-    @PutMapping("/")
-    public Marca alterar(@RequestBody Marca marca){
-        return marcaService.alterar(marca);
+    @PutMapping("/{id}")
+    public Marca alterar(@PathVariable("id") Long id,  @RequestBody(required = false) String nome) throws Exception{
+        return marcaService.alterar(id, nome);
     }
 
     @DeleteMapping("/{id}")

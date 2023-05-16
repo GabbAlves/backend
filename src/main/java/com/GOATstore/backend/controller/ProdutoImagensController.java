@@ -30,24 +30,30 @@ public class ProdutoImagensController {
     public List<ProdutoImagens> buscarTodos(){
         return produtoImagensService.buscarTodos();
     }
-    @PostMapping("/")
-    public ProdutoImagens inserir(@RequestParam("idProduto") Long idProduto, @RequestParam("file") MultipartFile file){
-        return produtoImagensService.inserir(idProduto, file);
+    
+    @PostMapping("/{id}")
+    public ProdutoImagens inserir(@RequestParam("idProduto") Long idProduto, @RequestBody String nome){
+        return produtoImagensService.inserir(idProduto, nome);
     }
+
     @PutMapping("/")
     public ProdutoImagens alterar(@RequestBody ProdutoImagens produtoImagens){
         return produtoImagensService.alterar(produtoImagens);
     }
 
     @DeleteMapping("/{id}")
-        public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
             produtoImagensService.excluir(id);
             return ResponseEntity.ok().build();
         }
 
         
+        // @PostMapping("/")
+        // public ProdutoImagens inserir(@RequestParam("idProduto") Long idProduto, @RequestParam("file") MultipartFile file){
+        //     return produtoImagensService.inserir(idProduto, file);
+        // }
         
-        }
-        
+    }
+    
 
     

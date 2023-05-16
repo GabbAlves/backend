@@ -28,30 +28,40 @@ public class ProdutoImagensService {
         return produtoImagensRepository.findAll();
     }
 
-    public ProdutoImagens inserir(Long idProduto, MultipartFile file){
-        Produto produto = produtoRepository.findById(idProduto).get();
-        ProdutoImagens produtoImagens = new ProdutoImagens();
+    // public ProdutoImagens inserir(Long idProduto, MultipartFile file){
+    //     Produto produto = produtoRepository.findById(idProduto).get();
+    //     ProdutoImagens produtoImagens = new ProdutoImagens();
 
 
-        try {
-            if(!file.isEmpty()){
-                byte[] bytes = file.getBytes();
-                String nomeImagem = String.valueOf(produto.getId()) + file.getOriginalFilename();
-                Path caminho = Paths
-                .get("C:/Imagens/" + nomeImagem);
-                Files.write(caminho, bytes);
-                produtoImagens.setNome(nomeImagem);
+    //     try {
+    //         if(!file.isEmpty()){
+    //             byte[] bytes = file.getBytes();
+    //             String nomeImagem = String.valueOf(produto.getId()) + file.getOriginalFilename();
+    //             Path caminho = Paths
+    //             .get("C:/Imagens/" + nomeImagem);
+    //             Files.write(caminho, bytes);
+    //             produtoImagens.setNome(nomeImagem);
              
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
 
-        produtoImagens.setProduto(produto);
-        produtoImagens.setDataCriacao(new Date());
-        produtoImagens = produtoImagensRepository.saveAndFlush(produtoImagens);
-        return produtoImagens;
-    }
+    //     produtoImagens.setProduto(produto);
+    //     produtoImagens.setDataCriacao(new Date());
+    //     produtoImagens = produtoImagensRepository.saveAndFlush(produtoImagens);
+    //     return produtoImagens;
+    // }
+
+
+    public ProdutoImagens inserir(Long idProduto, String nome){
+            Produto produto = produtoRepository.findById(idProduto).get();
+            ProdutoImagens produtoImagens = new ProdutoImagens();
+            produtoImagens.setProduto(produto);
+            produtoImagens.setDataCriacao(new Date());
+            produtoImagens = produtoImagensRepository.saveAndFlush(produtoImagens);
+            return produtoImagens;
+        }
 
     public ProdutoImagens alterar(ProdutoImagens produtoImagens){
         produtoImagens.setDataAtualizacao(new Date());

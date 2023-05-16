@@ -34,32 +34,32 @@ public class PessoaClienteService{
 
        public Pessoa inserir(PessoaClienteRequestDTO pessoaClienteRequestDTO) throws Exception {
         Pessoa pessoa = new PessoaClienteRequestDTO().converter(pessoaClienteRequestDTO);
-
+        
         if (pessoa != null) {
             if (pessoa.getNome() == null || pessoa.getNome().isEmpty()) {
-                throw new Exception("O nome de usuario não pode ser vazio");
-            }
+                    throw new Exception("O nome de usuario não pode ser vazio");
+                }
             if (pessoa.getEmail() == null) {
                 throw new Exception("O email do usuario não pode ser vazio");
             }
             if (pessoa.getSenha() != null && !pessoa.getSenha().isEmpty()) {
 
             }
-
-            List<Pessoa> pessoas = pessoaRepository.findByEmail(pessoa.getNome(), pessoa.getEmail());
+        
+            List<Pessoa> pessoas = pessoaRepository.findByEmail(pessoa.getEmail());
             if (pessoas != null && !pessoas.isEmpty()) {
-                throw new Exception("Já existe uma pessoa cadastrada com o mesmo nome e o Email.");
-            }
-
+                    throw new Exception("Já existe uma pessoa cadastrada com o mesmo nome e o Email.");
+                }
+            
             pessoa.setDataCriacao(new Date());
             Pessoa pessoaNovo = pessoaRepository.saveAndFlush(pessoa);
             permissaoPessoaService.vincularPessoaPermissaoCliente(pessoaNovo);
             emailService.enviarEmailTexto(pessoaNovo.getEmail(), "cadastro",
                     "Cadastro realizado com sucesso na loja GOAT STORE");
             return pessoaNovo;
-         } else {    
-            throw new RuntimeException("Ocorreu um erro!");
-        }
+            } else {    
+                     throw new RuntimeException("Ocorreu um erro!");
+                 }
     }
 
 
